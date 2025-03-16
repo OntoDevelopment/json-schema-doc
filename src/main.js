@@ -1,4 +1,1 @@
-import JSONSchemaMarkdownDoc from "./JSONSchemaMarkdownDoc";
-export default {
-    JSONSchemaMarkdownDoc: JSONSchemaMarkdownDoc,
-};
+export { default as JSONSchemaMarkdownDoc } from "./JSONSchemaMarkdownDoc.js";
