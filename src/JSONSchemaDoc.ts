@@ -5,7 +5,7 @@
  * @module JSONSchemaDoc
  */
 
-import JSONSchemaMarkdownDoc from "./JSONSchemaMarkdownDoc";
+import JSONSchemaMarkdownDoc from "./JSONSchemaMarkdownDoc.js";
 
 class JSONSchemaDoc {
     static markdown(schema: Schema | string, options: object = {}): string {

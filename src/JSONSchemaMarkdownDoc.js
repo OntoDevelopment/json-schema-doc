@@ -4,8 +4,8 @@
  * @link https://github.com/BrianWendt/json-schema-md-doc
  * @module JSONSchemaMarkdownDoc
  */
-import JSONSchemaDocAbstract from "./JSONSchemaDocAbstract";
 class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
+import JSONSchemaDocAbstract from "./JSONSchemaDocAbstract.js";
     constructor() {
         super(...arguments);
         this.indentChar = "\t";

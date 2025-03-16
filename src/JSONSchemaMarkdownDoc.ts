@@ -5,7 +5,7 @@
  * @module JSONSchemaMarkdownDoc
  */
 
-import JSONSchemaDocAbstract from "./JSONSchemaDocAbstract";
+import JSONSchemaDocAbstract from "./JSONSchemaDocAbstract.js";
 
 class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
     indentChar: string = "\t";
