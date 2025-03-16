@@ -7,7 +7,7 @@
 
 import JSONSchemaDocAbstract from "./JSONSchemaDocAbstract.js";
 
-class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
+export default class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
     indentChar: string = "\t";
     pathDivider: string = "/";
     objectNotation: string = "&thinsp;.&thinsp;";
@@ -381,5 +381,3 @@ class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
         return this;
     }
 }
-
-export default JSONSchemaMarkdownDoc;

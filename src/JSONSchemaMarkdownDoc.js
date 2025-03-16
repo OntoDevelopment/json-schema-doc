@@ -4,8 +4,8 @@
  * @link https://github.com/BrianWendt/json-schema-md-doc
  * @module JSONSchemaMarkdownDoc
  */
-class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
 import JSONSchemaDocAbstract from "./JSONSchemaDocAbstract.js";
+export default class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
     constructor() {
         super(...arguments);
         this.indentChar = "\t";
@@ -335,4 +335,3 @@ import JSONSchemaDocAbstract from "./JSONSchemaDocAbstract.js";
         return this;
     }
 }
-export default JSONSchemaMarkdownDoc;

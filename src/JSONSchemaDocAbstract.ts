@@ -5,7 +5,7 @@
  * @module JSONSchemaDocAbstract
  */
 
-abstract class JSONSchemaDocAbstract {
+export default abstract class JSONSchemaDocAbstract {
     schema: Schema | null = null;
     response: string = "";
     errors: string[] = [];
@@ -387,5 +387,3 @@ abstract class JSONSchemaDocAbstract {
         return this;
     }
 }
-
-export default JSONSchemaDocAbstract;

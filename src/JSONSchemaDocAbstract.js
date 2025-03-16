@@ -4,7 +4,7 @@
  * @link https://github.com/BrianWendt/json-schema-md-doc
  * @module JSONSchemaDocAbstract
  */
-class JSONSchemaDocAbstract {
+export default class JSONSchemaDocAbstract {
     constructor(schema, options) {
         this.schema = null;
         this.response = "";
@@ -285,4 +285,3 @@ class JSONSchemaDocAbstract {
         return this;
     }
 }
-export default JSONSchemaDocAbstract;
