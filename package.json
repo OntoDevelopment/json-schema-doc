@@ -18,6 +18,7 @@
         "url": "https://github.com/OntoDevelopment/json-schema-doc"
     },
     "scripts": {
+        "build": "tsc && prettier . --write",
         "lint": "eslint"
     },
     "homepage": "https://ontodevelopment.github.io/json-schema-doc",
