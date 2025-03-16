@@ -1,25 +1,31 @@
 {
-    "name": "json-schema-md-doc",
+    "name": "json-schema-doc",
     "author": "Brian Wendt (https://github.com/BrianWendt)",
-    "description": "Generate markdown documentation for JSON Schemas",
-    "main": "./docs/lib/JSONSchemaMarkdown.js",
+    "description": "Generate documentation for JSON Schemas",
+    "main": "./src/main.js",
+    "type": "module",
     "keywords": [
+        "json",
+        "schema",
+        "documentation",
+        "markdown",
         "json-schema"
     ],
-    "version": "1.0.0",
+    "version": "2.0.0",
     "license": "See LICENSE file",
     "repository": {
         "type": "git",
-        "url": "https://github.com/BrianWendt/json-schema-md-doc"
+        "url": "https://github.com/OntoDevelopment/json-schema-doc"
     },
     "scripts": {
-        "doc": "./node_modules/.bin/jsdoc -R ./README.md -c ./scripts/jsdoc_config.json",
-        "npm": "node ./scripts/npm.js"
+        "lint": "eslint"
     },
-    "homepage": "https://brianwendt.github.io/json-schema-md-doc",
+    "homepage": "https://ontodevelopment.github.io/json-schema-doc",
     "public": true,
-    "dependencies": {
-        "docdash": "^2.0.2",
-        "jsdoc": "^4.0.3"
+    "devDependencies": {
+        "@eslint/js": "^9.22.0",
+        "eslint": "^9.22.0",
+        "globals": "^16.0.0",
+        "typescript-eslint": "^8.26.1"
     }
 }
