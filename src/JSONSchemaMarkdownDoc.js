@@ -18,8 +18,7 @@ class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
     generateResponse() {
         if (this.errors.length > 0) {
             return this.errors.join("\n");
-        }
-        else {
+        } else {
             this.response += this.footer;
             return this.response;
         }
@@ -30,8 +29,7 @@ class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
         }
         if (bool) {
             return this.writeLine("This schema " + this.underline("does not") + " accept additional items.", level);
-        }
-        else {
+        } else {
             return this.writeLine("This schema accepts additional items.", level);
         }
     }
@@ -46,9 +44,11 @@ class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
             return this;
         }
         if (!bool) {
-            return this.writeLine("This schema " + this.underline("does not") + " accept additional properties.", level);
-        }
-        else {
+            return this.writeLine(
+                "This schema " + this.underline("does not") + " accept additional properties.",
+                level,
+            );
+        } else {
             return this.writeLine("This schema accepts additional properties.", level);
         }
     }
@@ -62,8 +62,8 @@ class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
         if (this.empty(comment) || typeof comment !== "string") {
             return this;
         }
-        const nl = (this.useHtml) ? "<br/>" : "\n";
-        return this.writeLine(this.bold('Comment', path) + nl + this.italic(comment), level);
+        const nl = this.useHtml ? "<br/>" : "\n";
+        return this.writeLine(this.bold("Comment", path) + nl + this.italic(comment), level);
     }
     writeConst(constant, level = 1) {
         if (this.notEmpty(constant)) {
@@ -152,7 +152,7 @@ class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
     }
     writeHeader(header, level = 1, path) {
         if (this.notEmpty(header)) {
-            this.writeLine(("#").repeat(Math.min(level + 1, 5)) + " " + header, level);
+            this.writeLine("#".repeat(Math.min(level + 1, 5)) + " " + header, level);
         }
         return this;
     }
@@ -224,7 +224,7 @@ class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
     }
     writePath(level = 1, path) {
         if (this.notEmpty(path)) {
-            this.writeLine(this.italic("path: " + path, path.replace('#', '')), level);
+            this.writeLine(this.italic("path: " + path, path.replace("#", "")), level);
         }
         return this;
     }
@@ -249,9 +249,8 @@ class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
     writeType(type, level = 1, path) {
         if (this.notEmpty(type)) {
             if (Array.isArray(type) && type.length > 1) {
-                this.writeLine("Types: `" + type.join('`, `') + "`", level);
-            }
-            else {
+                this.writeLine("Types: `" + type.join("`, `") + "`", level);
+            } else {
                 this.writeLine("Type: `" + type + "`", level);
             }
         }
@@ -268,32 +267,28 @@ class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
     bold(text, id) {
         if (this.useHtml && id) {
             return this.tag("b", text, id);
-        }
-        else {
+        } else {
             return this.emphasize(text, 2);
         }
     }
     italic(text, id) {
         if (this.useHtml && id) {
             return this.tag("i", text, id);
-        }
-        else {
+        } else {
             return this.emphasize(text, 1);
         }
     }
     boldItalic(text, id) {
         if (this.useHtml && id) {
             return this.tag("b", this.italic(text), id);
-        }
-        else {
+        } else {
             return this.emphasize(text, 3);
         }
     }
     underline(text, id) {
         if (this.useHtml) {
             return this.tag("u", text, id);
-        }
-        else {
+        } else {
             return text; // Markdown does not support underline
         }
     }
@@ -311,14 +306,11 @@ class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
     valueFormat(value) {
         if (value === "true" || value === "false") {
             return this.italic(value);
-        }
-        else if (typeof value === "boolean") {
+        } else if (typeof value === "boolean") {
             return this.italic(this.valueBool(value));
-        }
-        else if (typeof value === "string") {
+        } else if (typeof value === "string") {
             return this.italic('"' + value + '"');
-        }
-        else {
+        } else {
             return this.code(value);
         }
     }
@@ -330,7 +322,7 @@ class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
         }
         return this;
     }
-    indent(level, indentChar = false, listChar = ' - ') {
+    indent(level, indentChar = false, listChar = " - ") {
         if (level > 1) {
             this.response += (indentChar || this.indentChar).repeat(level - 1);
         }

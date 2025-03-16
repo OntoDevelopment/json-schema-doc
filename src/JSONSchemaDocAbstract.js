@@ -22,12 +22,10 @@ class JSONSchemaDocAbstract {
         if (typeof schema === "string") {
             try {
                 this.schema = JSON.parse(schema);
+            } catch (e) {
+                this.error("invalid json: " + e.message);
             }
-            catch (e) {
-                this.error('invalid json: ' + e.message);
-            }
-        }
-        else {
+        } else {
             this.schema = schema;
         }
         return this;
@@ -41,8 +39,7 @@ class JSONSchemaDocAbstract {
         if (this.errors.length < 1) {
             try {
                 this.generateChildren("", this.schema, 0, "#");
-            }
-            catch (e) {
+            } catch (e) {
                 this.error(e.toString());
             }
         }
@@ -51,8 +48,7 @@ class JSONSchemaDocAbstract {
     generateResponse() {
         if (this.errors.length > 0) {
             return this.errors.join("\n");
-        }
-        else {
+        } else {
             return this.response;
         }
     }
@@ -62,7 +58,7 @@ class JSONSchemaDocAbstract {
         }
         this.determineType(data);
         this.typeGeneric(name, data, level, path);
-        data.type.forEach(type => {
+        data.type.forEach((type) => {
             this.getTypeMethod(type)(name, data, level, path);
         });
         if (typeof data.definitions === "object" && Object.keys(data.definitions).length > 0) {
@@ -82,22 +78,34 @@ class JSONSchemaDocAbstract {
         if (typeof data.type === "string") {
             data.type = [data.type];
             return data.type;
-        }
-        else if (Array.isArray(data.type)) {
+        } else if (Array.isArray(data.type)) {
             return data.type;
         }
         data.type = [];
-        if (this.hasAnyProperty(data, ['items', 'additionalItems', 'minItems', 'maxItems', 'uniqueItems', 'contains'])) {
-            data.type.push('array');
+        if (
+            this.hasAnyProperty(data, ["items", "additionalItems", "minItems", "maxItems", "uniqueItems", "contains"])
+        ) {
+            data.type.push("array");
         }
-        if (this.hasAnyProperty(data, ['minimum', 'maximum', 'exclusiveMinimum', 'exclusiveMaximum', 'multipleOf'])) {
-            data.type.push('number');
+        if (this.hasAnyProperty(data, ["minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum", "multipleOf"])) {
+            data.type.push("number");
         }
-        if (this.hasAnyProperty(data, ['required', 'properties', 'additionalProperties', 'patternProperties', 'minProperties', 'maxProperties', 'propertyNames', 'dependencies'])) {
-            data.type.push('object');
+        if (
+            this.hasAnyProperty(data, [
+                "required",
+                "properties",
+                "additionalProperties",
+                "patternProperties",
+                "minProperties",
+                "maxProperties",
+                "propertyNames",
+                "dependencies",
+            ])
+        ) {
+            data.type.push("object");
         }
-        if (this.hasAnyProperty(data, ['maxLength', 'minLength', 'pattern', 'format'])) {
-            data.type.push('string');
+        if (this.hasAnyProperty(data, ["maxLength", "minLength", "pattern", "format"])) {
+            data.type.push("string");
         }
         return data.type;
     }
@@ -105,7 +113,7 @@ class JSONSchemaDocAbstract {
         return Object.prototype.hasOwnProperty.call(data, prop);
     }
     hasAnyProperty(data, props) {
-        return props.some(prop => this.hasProperty(data, prop));
+        return props.some((prop) => this.hasProperty(data, prop));
     }
     typeGeneric(name, data, level, path) {
         this.writeHeader(data.title, level, path);
@@ -132,12 +140,11 @@ class JSONSchemaDocAbstract {
         if (this.notEmpty(data.items)) {
             this.writeSectionName("Items", level + 1, path + "/items");
             if (Array.isArray(data.items)) {
-                data.items.forEach(item => {
-                    this.generateChildren('item', item, level + 1, path + "/items");
+                data.items.forEach((item) => {
+                    this.generateChildren("item", item, level + 1, path + "/items");
                 });
-            }
-            else if (this.notEmpty(data.items) && typeof data.items === "object") {
-                this.generateChildren('item', data.items, level + 1, path + "/items");
+            } else if (this.notEmpty(data.items) && typeof data.items === "object") {
+                this.generateChildren("item", data.items, level + 1, path + "/items");
             }
         }
         this.writeContains(data.contains, level);
@@ -202,11 +209,9 @@ class JSONSchemaDocAbstract {
     valueMinMax(min, max) {
         if (this.notEmpty(min) && this.notEmpty(max)) {
             return "between " + min + " and " + max + "\n";
-        }
-        else if (this.notEmpty(min)) {
+        } else if (this.notEmpty(min)) {
             return " &ge; " + min + "\n";
-        }
-        else if (this.notEmpty(max)) {
+        } else if (this.notEmpty(max)) {
             return " &le; " + max + "\n";
         }
         return "";
@@ -227,49 +232,50 @@ class JSONSchemaDocAbstract {
     valueBool(bool) {
         if (typeof bool === "string") {
             return bool;
-        }
-        else {
-            return (bool) ? "true" : "false";
+        } else {
+            return bool ? "true" : "false";
         }
     }
     valueFormat(value) {
         if (typeof value === "boolean") {
             return this.valueBool(value);
-        }
-        else if (typeof value === "string") {
+        } else if (typeof value === "string") {
             return '"' + value + '"';
-        }
-        else {
+        } else {
             return value;
         }
     }
     refLink(ref) {
-        if (ref[0] !== '#' && ref.substring(0, 4).toLowerCase() !== "http") {
-            ref = '#' + this.slugify(ref);
+        if (ref[0] !== "#" && ref.substring(0, 4).toLowerCase() !== "http") {
+            ref = "#" + this.slugify(ref);
         }
         return ref;
     }
     escapeLink(value) {
-        return value.replace('$', '\\$'); //$ in [] breaks markdown 
+        return value.replace("$", "\\$"); //$ in [] breaks markdown
     }
     slugify(string) {
-        return string.toString().toLowerCase()
-            .replace(/\s+/g, '-') // Replace spaces with -
-            .replace(/_/g, '-') // Replace _ with -
-            .replace(/&/g, '-and-') // Replace & with "-and-"
-            .replace(/[^a-zA-Z0-9-.]+/g, '') // Remove all non-word characters
-            .replace(/--+/g, '-') // Replace multiple - with single -
-            .replace(/^-+/, '') // Trim - from start of text
-            .replace(/-+$/, ''); // Trim - from end of text
+        return string
+            .toString()
+            .toLowerCase()
+            .replace(/\s+/g, "-") // Replace spaces with -
+            .replace(/_/g, "-") // Replace _ with -
+            .replace(/&/g, "-and-") // Replace & with "-and-"
+            .replace(/[^a-zA-Z0-9-.]+/g, "") // Remove all non-word characters
+            .replace(/--+/g, "-") // Replace multiple - with single -
+            .replace(/^-+/, "") // Trim - from start of text
+            .replace(/-+$/, ""); // Trim - from end of text
     }
     /**
      * @description Check if a value is empty (undefined, null, empty string, or empty array).
      */
     empty(value) {
-        return typeof value === "undefined"
-            || value === null
-            || (typeof value === "string" && value.length < 1)
-            || (Array.isArray(value) && value.length < 1);
+        return (
+            typeof value === "undefined" ||
+            value === null ||
+            (typeof value === "string" && value.length < 1) ||
+            (Array.isArray(value) && value.length < 1)
+        );
     }
     notEmpty(value) {
         return !this.empty(value);

@@ -9,7 +9,7 @@ import JSONSchemaMarkdownDoc from "./JSONSchemaMarkdownDoc";
 
 class JSONSchemaDoc {
     static markdown(schema: Schema | string, options: object = {}): string {
-        return (new JSONSchemaMarkdownDoc(schema, options)).generate();
+        return new JSONSchemaMarkdownDoc(schema, options).generate();
     }
 }
 

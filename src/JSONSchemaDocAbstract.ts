@@ -26,7 +26,7 @@ abstract class JSONSchemaDocAbstract {
             try {
                 this.schema = JSON.parse(schema);
             } catch (e) {
-                this.error('invalid json: ' + (e as Error).message);
+                this.error("invalid json: " + (e as Error).message);
             }
         } else {
             this.schema = schema;
@@ -66,7 +66,7 @@ abstract class JSONSchemaDocAbstract {
         this.determineType(data);
         this.typeGeneric(name, data, level, path);
 
-        data.type.forEach(type => {
+        data.type.forEach((type) => {
             this.getTypeMethod(type)(name, data, level, path);
         });
         if (typeof data.definitions === "object" && Object.keys(data.definitions).length > 0) {
@@ -91,17 +91,30 @@ abstract class JSONSchemaDocAbstract {
             return data.type;
         }
         data.type = [];
-        if (this.hasAnyProperty(data, ['items', 'additionalItems', 'minItems', 'maxItems', 'uniqueItems', 'contains'])) {
-            data.type.push('array');
+        if (
+            this.hasAnyProperty(data, ["items", "additionalItems", "minItems", "maxItems", "uniqueItems", "contains"])
+        ) {
+            data.type.push("array");
         }
-        if (this.hasAnyProperty(data, ['minimum', 'maximum', 'exclusiveMinimum', 'exclusiveMaximum', 'multipleOf'])) {
-            data.type.push('number');
+        if (this.hasAnyProperty(data, ["minimum", "maximum", "exclusiveMinimum", "exclusiveMaximum", "multipleOf"])) {
+            data.type.push("number");
         }
-        if (this.hasAnyProperty(data, ['required', 'properties', 'additionalProperties', 'patternProperties', 'minProperties', 'maxProperties', 'propertyNames', 'dependencies'])) {
-            data.type.push('object');
+        if (
+            this.hasAnyProperty(data, [
+                "required",
+                "properties",
+                "additionalProperties",
+                "patternProperties",
+                "minProperties",
+                "maxProperties",
+                "propertyNames",
+                "dependencies",
+            ])
+        ) {
+            data.type.push("object");
         }
-        if (this.hasAnyProperty(data, ['maxLength', 'minLength', 'pattern', 'format'])) {
-            data.type.push('string');
+        if (this.hasAnyProperty(data, ["maxLength", "minLength", "pattern", "format"])) {
+            data.type.push("string");
         }
 
         return data.type;
@@ -112,7 +125,7 @@ abstract class JSONSchemaDocAbstract {
     }
 
     hasAnyProperty(data: Schema, props: string[]): boolean {
-        return props.some(prop => this.hasProperty(data, prop));
+        return props.some((prop) => this.hasProperty(data, prop));
     }
 
     typeGeneric(name: string, data: Schema, level: number, path: string): void {
@@ -142,11 +155,11 @@ abstract class JSONSchemaDocAbstract {
         if (this.notEmpty(data.items)) {
             this.writeSectionName("Items", level + 1, path + "/items");
             if (Array.isArray(data.items)) {
-                data.items.forEach(item => {
-                    this.generateChildren('item', item, level + 1, path + "/items");
+                data.items.forEach((item) => {
+                    this.generateChildren("item", item, level + 1, path + "/items");
                 });
             } else if (this.notEmpty(data.items) && typeof data.items === "object") {
-                this.generateChildren('item', data.items, level + 1, path + "/items");
+                this.generateChildren("item", data.items, level + 1, path + "/items");
             }
         }
         this.writeContains(data.contains, level);
@@ -196,75 +209,75 @@ abstract class JSONSchemaDocAbstract {
         // do nothing, this is okay
     }
 
-    abstract writeAdditionalItems(bool: boolean | undefined, level: number): this
+    abstract writeAdditionalItems(bool: boolean | undefined, level: number): this;
 
-    abstract writeItemsMinMax(min: number | undefined, max: number | undefined, level: number): this
+    abstract writeItemsMinMax(min: number | undefined, max: number | undefined, level: number): this;
 
-    abstract writeAdditionalProperties(bool: boolean | undefined, level: number): this
+    abstract writeAdditionalProperties(bool: boolean | undefined, level: number): this;
 
-    abstract writeMinMaxProperties(min: number | undefined, max: number | undefined, level: number): this
+    abstract writeMinMaxProperties(min: number | undefined, max: number | undefined, level: number): this;
 
-    abstract writeComment(comment: string | undefined, level: number, path: string): this
+    abstract writeComment(comment: string | undefined, level: number, path: string): this;
 
-    abstract writeConst(constant: any, level: number): this
+    abstract writeConst(constant: any, level: number): this;
 
-    abstract writeConditionalIf(ifSchema: Schema | undefined, level: number): this
+    abstract writeConditionalIf(ifSchema: Schema | undefined, level: number): this;
 
-    abstract writeConditionalThen(thenSchema: Schema | undefined, level: number): this
+    abstract writeConditionalThen(thenSchema: Schema | undefined, level: number): this;
 
-    abstract writeConditionalElse(elseSchema: Schema | undefined, level: number): this
+    abstract writeConditionalElse(elseSchema: Schema | undefined, level: number): this;
 
-    abstract writeContentEncoding(contentEncoding: string | undefined, level: number): this
+    abstract writeContentEncoding(contentEncoding: string | undefined, level: number): this;
 
-    abstract writeContentMediaType(contentMediaType: string | undefined, level: number): this
+    abstract writeContentMediaType(contentMediaType: string | undefined, level: number): this;
 
-    abstract writeContains(contains: Schema | undefined, level: number): this
+    abstract writeContains(contains: Schema | undefined, level: number): this;
 
-    abstract writeDefault(value: any, level: number, path: string): this
+    abstract writeDefault(value: any, level: number, path: string): this;
 
-    abstract writeDescription(description: string | undefined, level: number, path: string): this
+    abstract writeDescription(description: string | undefined, level: number, path: string): this;
 
-    abstract writeDependencies(dependencies: any, level: number): this
+    abstract writeDependencies(dependencies: any, level: number): this;
 
-    abstract writeEnum(list: any[] | undefined, level: number): this
+    abstract writeEnum(list: any[] | undefined, level: number): this;
 
-    abstract writeFormat(format: string | undefined, level: number): this
+    abstract writeFormat(format: string | undefined, level: number): this;
 
-    abstract writeExamples(list: any[] | undefined, level: number, path: string): this
+    abstract writeExamples(list: any[] | undefined, level: number, path: string): this;
 
-    abstract writeHeader(header: string | undefined, level: number, path?: string): this
+    abstract writeHeader(header: string | undefined, level: number, path?: string): this;
 
-    abstract writeId(id: string | undefined, level: number, path?: string): this
+    abstract writeId(id: string | undefined, level: number, path?: string): this;
 
-    abstract writeList(list: any[], level: number): this
+    abstract writeList(list: any[], level: number): this;
 
-    abstract writeMinimumMaximum(min: number | undefined, max: number | undefined, level: number): this
+    abstract writeMinimumMaximum(min: number | undefined, max: number | undefined, level: number): this;
 
-    abstract writeExclusiveMinimumMaximum(min: number | undefined, max: number | undefined, level: number): this
+    abstract writeExclusiveMinimumMaximum(min: number | undefined, max: number | undefined, level: number): this;
 
-    abstract writeMultipleOf(number: number | undefined, level: number): this
+    abstract writeMultipleOf(number: number | undefined, level: number): this;
 
-    abstract writePattern(pattern: string | undefined, level: number): this
+    abstract writePattern(pattern: string | undefined, level: number): this;
 
-    abstract writeMinMaxLength(min: number | undefined, max: number | undefined, level: number): this
+    abstract writeMinMaxLength(min: number | undefined, max: number | undefined, level: number): this;
 
-    abstract writePropertyNames(data: Schema | undefined, level: number): this
+    abstract writePropertyNames(data: Schema | undefined, level: number): this;
 
-    abstract writePropertyName(prop: string, level: number, path: string, required: boolean): this
+    abstract writePropertyName(prop: string, level: number, path: string, required: boolean): this;
 
-    abstract writeRef(ref: string | undefined, level: number): this
+    abstract writeRef(ref: string | undefined, level: number): this;
 
-    abstract writePath(level: number, path: string): this
+    abstract writePath(level: number, path: string): this;
 
-    abstract writeSchema(uri: string | undefined, level: number): this
+    abstract writeSchema(uri: string | undefined, level: number): this;
 
-    abstract writeSectionName(name: string, level: number, path?: string): this
+    abstract writeSectionName(name: string, level: number, path?: string): this;
 
-    abstract writeTerm(term: string, level: number): this
+    abstract writeTerm(term: string, level: number): this;
 
-    abstract writeType(type: string | string[] | undefined, level: number, path: string): this
+    abstract writeType(type: string | string[] | undefined, level: number, path: string): this;
 
-    abstract writeUniqueItems(bool: boolean | undefined, level: number): this
+    abstract writeUniqueItems(bool: boolean | undefined, level: number): this;
 
     getTypeMethod(type: string): (name: string, data: Schema, level: number, path: string) => void {
         switch (type.toLowerCase()) {
@@ -285,7 +298,6 @@ abstract class JSONSchemaDocAbstract {
                 return this.typeUnknown.bind(this);
         }
     }
-
 
     valueMinMax(min: number | undefined, max: number | undefined): string {
         if (this.notEmpty(min) && this.notEmpty(max)) {
@@ -316,52 +328,54 @@ abstract class JSONSchemaDocAbstract {
         if (typeof bool === "string") {
             return bool;
         } else {
-            return (bool) ? "true" : "false";
+            return bool ? "true" : "false";
         }
     }
 
     valueFormat(value: any): string {
         if (typeof value === "boolean") {
             return this.valueBool(value);
-        }
-        else if (typeof value === "string") {
+        } else if (typeof value === "string") {
             return '"' + value + '"';
-        }
-        else {
+        } else {
             return value;
         }
     }
 
     refLink(ref: string): string {
-        if (ref[0] !== '#' && ref.substring(0, 4).toLowerCase() !== "http") {
-            ref = '#' + this.slugify(ref);
+        if (ref[0] !== "#" && ref.substring(0, 4).toLowerCase() !== "http") {
+            ref = "#" + this.slugify(ref);
         }
         return ref;
     }
 
     escapeLink(value: string): string {
-        return value.replace('$', '\\$'); //$ in [] breaks markdown 
+        return value.replace("$", "\\$"); //$ in [] breaks markdown
     }
 
     slugify(string: string): string {
-        return string.toString().toLowerCase()
-            .replace(/\s+/g, '-') // Replace spaces with -
-            .replace(/_/g, '-') // Replace _ with -
-            .replace(/&/g, '-and-') // Replace & with "-and-"
-            .replace(/[^a-zA-Z0-9-.]+/g, '') // Remove all non-word characters
-            .replace(/--+/g, '-') // Replace multiple - with single -
-            .replace(/^-+/, '') // Trim - from start of text
-            .replace(/-+$/, ''); // Trim - from end of text
+        return string
+            .toString()
+            .toLowerCase()
+            .replace(/\s+/g, "-") // Replace spaces with -
+            .replace(/_/g, "-") // Replace _ with -
+            .replace(/&/g, "-and-") // Replace & with "-and-"
+            .replace(/[^a-zA-Z0-9-.]+/g, "") // Remove all non-word characters
+            .replace(/--+/g, "-") // Replace multiple - with single -
+            .replace(/^-+/, "") // Trim - from start of text
+            .replace(/-+$/, ""); // Trim - from end of text
     }
 
     /**
      * @description Check if a value is empty (undefined, null, empty string, or empty array).
      */
     empty(value: any): boolean {
-        return typeof value === "undefined"
-            || value === null
-            || (typeof value === "string" && value.length < 1)
-            || (Array.isArray(value) && value.length < 1);
+        return (
+            typeof value === "undefined" ||
+            value === null ||
+            (typeof value === "string" && value.length < 1) ||
+            (Array.isArray(value) && value.length < 1)
+        );
     }
 
     notEmpty(value: any): boolean {
