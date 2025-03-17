@@ -1,7 +1,7 @@
 /**
  * @description Abstract class for generating documentation from JSON Schema.
  * @author Brian Wendt <brianwendt@users.noreply.github.com>
- * @link https://github.com/OntoDevelopment/json-schema-doc
+ * @link https://github.com/OntoDevelopment/json-schema-doc-ts
  * @module JSONSchemaDocAbstract
  */
 

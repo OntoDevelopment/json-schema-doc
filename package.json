@@ -15,7 +15,7 @@
     "license": "SEE LICENSE IN LICENSE",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/OntoDevelopment/json-schema-doc.git"
+        "url": "git+https://github.com/OntoDevelopment/json-schema-doc-ts.git"
     },
     "bugs": {
         "url": "https://github.com/OntoDevelopment/json-schema-doc-ts/issues"

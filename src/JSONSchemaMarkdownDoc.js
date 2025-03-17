@@ -1,7 +1,7 @@
 /**
  * @description Converts JSON Schema to Markdown documentation.
  * @author Brian Wendt <brianwendt@users.noreply.github.com>
- * @link https://github.com/OntoDevelopment/json-schema-doc
+ * @link https://github.com/OntoDevelopment/json-schema-doc-ts
  * @module JSONSchemaMarkdownDoc
  */
 import JSONSchemaDocAbstract from "./JSONSchemaDocAbstract.js";
@@ -12,7 +12,7 @@ export default class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
         this.pathDivider = "/";
         this.objectNotation = "&thinsp;.&thinsp;";
         this.footer =
-            "\n*Generated with [OntoDevelopment/json-schema-doc](https://github.com/OntoDevelopment/json-schema-doc)*";
+            "\n*Generated with [OntoDevelopment/json-schema-doc-ts](https://github.com/OntoDevelopment/json-schema-doc-ts)*";
         this.useHtml = true;
         this.emphasisChar = "*";
     }
