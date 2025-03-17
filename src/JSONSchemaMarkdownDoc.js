@@ -1,7 +1,7 @@
 /**
  * @description Converts JSON Schema to Markdown documentation.
  * @author Brian Wendt <brianwendt@users.noreply.github.com>
- * @link https://github.com/BrianWendt/json-schema-md-doc
+ * @link https://github.com/OntoDevelopment/json-schema-doc
  * @module JSONSchemaMarkdownDoc
  */
 import JSONSchemaDocAbstract from "./JSONSchemaDocAbstract.js";
