@@ -1,4 +1,4 @@
-# json-schema-doc
+# json-schema-doc-ts
 
 **NOTE:** This module supports [json-schema.org](https://json-schema.org/) `draft-7`. Previous drafts may not generate documentation correctly.
 
@@ -12,11 +12,11 @@ If you just need to quickly create markdown from a JSON schema, use the [online 
 **es6 and later**
 
 ```
-npm install json-schema-md-doc
+npm install json-schema-doc-ts
 ```
 
 ```javascript
-import { JSONSchemaMarkdownDoc } from "json-schema-doc";
+import { JSONSchemaMarkdownDoc } from "json-schema-doc-ts";
 
 // simple schema for the example
 const colors_schema = {
@@ -54,7 +54,7 @@ The value is restricted to the following:
 You may easily extend `JSONSchemaMarkdownDoc` to customize the formatting of your markdown by overriding any method.
 
 ```typescript
-import { JSONSchemaMarkdownDoc } from "json-schema-doc";
+import { JSONSchemaMarkdownDoc } from "json-schema-doc-ts";
 
 class MyDoccer extends JSONSchemaMarkdownDoc {
     footer = "Thanks for reading the documentation!";
@@ -71,7 +71,7 @@ class MyDoccer extends JSONSchemaMarkdownDoc {
 ## Generate documentation in other formats for JSON Schemas
 This project may add a JSONSchemaHtmlDoc (JSON Schema to HTML documentation) class in the future. This is a small sample of what that might look like.
 ```typescript
-import { JSONSchemaDocAbstract } from "json-schema-doc";
+import { JSONSchemaDocAbstract } from "json-schema-doc-ts";
 
 class JSONSchemaHtmlDoc extends JSONSchemaDocAbstract {
     writeLine(text: string = "", level: number = 1): this {
