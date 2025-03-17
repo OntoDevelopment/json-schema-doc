@@ -11,7 +11,7 @@ export default class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
     indentChar: string = "\t";
     pathDivider: string = "/";
     objectNotation: string = "&thinsp;.&thinsp;";
-    footer: string = "\n*Generated with [json-schema-md-doc](https://brianwendt.github.io/json-schema-md-doc/)*";
+    footer: string = "\n*Generated with [OntoDevelopment/json-schema-doc](https://github.com/OntoDevelopment/json-schema-doc)*";
     useHtml: boolean = true;
     emphasisChar: string = "*";
 
