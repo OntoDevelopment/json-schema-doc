@@ -18,13 +18,13 @@
         "url": "git+https://github.com/OntoDevelopment/json-schema-doc.git"
     },
     "bugs": {
-        "url": "https://github.com/OntoDevelopment/json-schema-doc/issues"
+        "url": "https://github.com/OntoDevelopment/json-schema-doc-ts/issues"
     },
     "scripts": {
         "build": "tsc && prettier . --write",
         "lint": "eslint"
     },
-    "homepage": "https://ontodevelopment.github.io/json-schema-doc-ts",
+    "homepage": "https://github.com/OntoDevelopment/json-schema-doc-ts",
     "public": true,
     "devDependencies": {
         "@eslint/js": "^9.22.0",
