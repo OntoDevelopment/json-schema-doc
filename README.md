@@ -84,3 +84,7 @@ class JSONSchemaHtmlDoc extends JSONSchemaDocAbstract {
     // ...
 }
 ```
+
+## Unit Testing
+Unit tests built with vitest.
+See [github.com/OntoDevelopment/json-schema-doc-tests](https://github.com/OntoDevelopment/json-schema-doc-tests)
