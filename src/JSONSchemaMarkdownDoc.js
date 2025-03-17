@@ -119,7 +119,7 @@ export default class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
     }
     writeDescription(description, level = 1, path) {
         if (this.notEmpty(description) && typeof description === "string") {
-            this.writeLine("_" + description.replace("\n", "<br>") + "_", level);
+            this.writeLine(this.italic(description.replace("\n", "<br>")), level);
         }
         return this;
     }

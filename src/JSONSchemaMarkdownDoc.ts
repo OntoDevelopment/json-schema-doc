@@ -11,7 +11,8 @@ export default class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
     indentChar: string = "\t";
     pathDivider: string = "/";
     objectNotation: string = "&thinsp;.&thinsp;";
-    footer: string = "\n*Generated with [OntoDevelopment/json-schema-doc](https://github.com/OntoDevelopment/json-schema-doc)*";
+    footer: string =
+        "\n*Generated with [OntoDevelopment/json-schema-doc](https://github.com/OntoDevelopment/json-schema-doc)*";
     useHtml: boolean = true;
     emphasisChar: string = "*";
 
@@ -133,7 +134,7 @@ export default class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
 
     writeDescription(description: string | undefined, level: number = 1, path: string): this {
         if (this.notEmpty(description) && typeof description === "string") {
-            this.writeLine("_" + description.replace("\n", "<br>") + "_", level);
+            this.writeLine(this.italic(description.replace("\n", "<br>")), level);
         }
         return this;
     }
