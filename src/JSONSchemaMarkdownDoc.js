@@ -11,7 +11,7 @@ export default class JSONSchemaMarkdownDoc extends JSONSchemaDocAbstract {
         this.indentChar = "\t";
         this.pathDivider = "/";
         this.objectNotation = "&thinsp;.&thinsp;";
-        this.footer = "\n_Generated with [json-schema-md-doc](https://brianwendt.github.io/json-schema-md-doc/)_";
+        this.footer = "\n*Generated with [json-schema-md-doc](https://brianwendt.github.io/json-schema-md-doc/)*";
         this.useHtml = true;
         this.emphasisChar = "*";
     }
