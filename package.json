@@ -17,6 +17,9 @@
         "type": "git",
         "url": "https://github.com/OntoDevelopment/json-schema-doc.git"
     },
+    "bugs": {
+        "url": "https://github.com/OntoDevelopment/json-schema-doc/issues"
+    },
     "scripts": {
         "build": "tsc && prettier . --write",
         "lint": "eslint"
